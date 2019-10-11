@@ -37,9 +37,12 @@ namespace PromoCodeAPI.Services.Communication
             if (!ExistsTheatre(shoppingCart.Sessions.Theatre.Id))
                 results.Errors.Add(AddFailure("Theatre", "Theatre not found"));
 
-            return new ShoppingCartResult();
+            if (!results.IsValid)
+                return new ShoppingCartResult();
 
-            //return new ShoppingCartResult { _Id = Guid.NewGuid() };
+
+
+            return new ShoppingCartResult { _Id = Guid.NewGuid() };
         }   
 
         private ValidationFailure AddFailure(string property, string error)
@@ -51,7 +54,7 @@ namespace PromoCodeAPI.Services.Communication
         {
             var promoCode = _repository.GetCode(code);
 
-            return promoCode.Status == StatusPromoCode.Active;
+            return promoCode == null ? false : promoCode.Status == StatusPromoCode.Active;
         }
         private bool ExistsMovie(int movieId)
         {

@@ -15,16 +15,16 @@ namespace PromoCodeAPI.Infra.Data.Repositories
         }
         public PromoCode GetCode(string code)
         {
-            return _context.PromoCodes.Single(x => x.Code == code);
+            return _context.PromoCodes.SingleOrDefault(x => x.Code == code);
         }
 
         public Movie GetMovie(int movieId)
         {
-            return _context.Movies.Single(x => x.Id == movieId);
+            return _context.Movies.SingleOrDefault(x => x.Id == movieId);
         }
         public Theatre GetTheatre(int theatreId)
         {
-            return _context.Theatres.Single(x => x.Id == theatreId );
+            return _context.Theatres.SingleOrDefault(x => x.Id == theatreId);
         }
 
         public Promotion GetPromotion(string code)
